@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple PocketTTS Demo</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; gap: 20px; padding-top: 50px; background: #000; color: aliceblue; }
+        textarea { width: 300px; height: 100px; padding: 10px; }
+        .buttons { display: flex; gap: 10px; }
+        button { padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>AkariNet PocketTTS Demo</h2>
+
+    <textarea id="text">Hello! I am speaking from a hardcoded voice file.</textarea>
+
+    <div class="buttons">
+        <button onclick="speak(document.getElementById('text').value)">Speak</button>
+        <button onclick="interruptTTS()">Stop</button>
+    </div>
+
+    <p><small>Open the browser console (F12) to see status updates.</small></p>
+
+    <script type="module">
+        import { PocketTTS } from './AkariNet_PocketTTS.js';
+
+        // 1. Setup the configuration
+        const ttsSettings = {
+            voiceUrl: './voice.mp3', // Hardcoded path to your mp3
+            speed: 1.0,              // 0.5 to 2.0
+            steps: 1,                // 1 to 8 (higher is better quality, slower)
+            temperature: 1.2,        // 0.1 to 1.5 (randomness/expressiveness)
+            streaming: false          // true = play as it generates, false = wait until done
+        };
+
+        // 2. Initialize the engine
+        // This automatically sets up window.speak() and window.interruptTTS()
+        window.initTTS(ttsSettings);
+    </script>
+
+</body>
+</html>
