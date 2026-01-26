@@ -43,7 +43,7 @@ export class PocketTTS {
         });
 
         // 2. Setup Single Worker
-        this.worker = new Worker('./inference-worker.js', { type: 'module' });
+        this.worker = new Worker('https://76836.github.io/AkariNet-PocketTTS/inference-worker.js', { type: 'module' });
         
         // 3. Setup Listener
         this.worker.onmessage = (e) => this.handleWorkerMessage(e.data);
@@ -347,4 +347,5 @@ window.initTTS = (config) => {
     window.tts = new PocketTTS(config);
     window.speak = (text) => window.tts.speak(text);
     window.interrupt = () => window.tts.interrupt();
+
 };
